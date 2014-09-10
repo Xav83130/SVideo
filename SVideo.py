@@ -3,14 +3,16 @@
 
 import pprint
 import pygame
+import sys
 from pygame.locals import *
 import os
 
 # Init framebuffer/touchscreen environment variables
-os.putenv('SDL_VIDEODRIVER', 'fbcon')
-os.putenv('SDL_FBDEV'      , '/dev/fb1')
-os.putenv('SDL_MOUSEDRV'   , 'TSLIB')
-os.putenv('SDL_MOUSEDEV'   , '/dev/input/touchscreen')
+if sys.platform == "linux2":
+    os.putenv('SDL_VIDEODRIVER', 'fbcon')
+    os.putenv('SDL_FBDEV'      , '/dev/fb1')
+    os.putenv('SDL_MOUSEDRV'   , 'TSLIB')
+    os.putenv('SDL_MOUSEDEV'   , '/dev/input/touchscreen')
 
 
 # Init pygame and screen
@@ -19,8 +21,11 @@ pygame.init()
 print "Setting Mouse invisible..."
 #pygame.mouse.set_visible(False)
 print "Setting fullscreen..."
-modes = pygame.display.list_modes(16)
-fenetre = pygame.display.set_mode(modes[0], FULLSCREEN, 16)
+if sys.platform == "darwin":
+    fenetre = pygame.display.set_mode((320, 240))
+else:
+    modes = pygame.display.list_modes(16)
+    fenetre = pygame.display.set_mode(modes[0], FULLSCREEN, 16)
 
 pygame.font.init()
 
