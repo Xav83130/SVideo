@@ -146,3 +146,6 @@ while continuer:
             if event.type == pygame.QUIT:
                 continuer = 0
             mainView.update()
+        elif event.type == pygame.QUIT:
+            print("bye bye")
+            exit(0)
