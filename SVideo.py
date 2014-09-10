@@ -134,9 +134,10 @@ pygame.display.flip()
                    
 continuer = 1
 while continuer:
-    for event in pygame.event.get(pygame.MOUSEBUTTONUP):
-        for clickZone in clickZones:
-            clickZone.processEvent(event)
-        if event.type == pygame.QUIT:
-            continuer = 0
-        mainView.update()
+    for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONUP:
+            for clickZone in clickZones:
+                clickZone.processEvent(event)
+            if event.type == pygame.QUIT:
+                continuer = 0
+            mainView.update()
